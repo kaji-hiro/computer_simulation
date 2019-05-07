@@ -4,7 +4,7 @@
 int main(void){
 
   double x = 1, y = 2, tmp, a = 0, b = 0;
-  
+
   do{
     tmp = y;
     y += x;

@@ -1,32 +1,43 @@
 #include <stdio.h>
+#include <math.h>
+
+#define NUMBER 100
+
+int digit_check(const int num){
+  int digits = 0, tmp = num;
+  while(tmp != 0){
+    tmp /= 10;
+    digits++;
+  }
+  return digits;
+}
 
 int main(void){
-  int n[25] = {1,1};
-  int array[100] = {};
-  int j = 0;
-  for (size_t i = 0; i < 22; i++) {
-    n[i + 2] = n[i] + n[i + 1];
-    if(n[i] > 10){
-      if(n[i] > 100){
-        if(n[i] > 1000){
-          if(n[i] > 10000){
-            array[j] = n[i] / 10000;
-            j++;
-          }
-          array[j] = n[i] / 1000 % 10;
-          j ++;
-        }
-        array[j] = n[i] / 100 % 10;
-        j ++;
-      }
-      array[j] = n[i] / 10 % 10;
+  long int sequence1 = 1, sequence2 = 1, tmp, num, digits;
+  long int comulative_sum [NUMBER] = {0};
+  int j = 1;
+
+  while(comulative_sum[NUMBER] == 0){
+    digits = digit_check(sequence1);
+    for (int i = digits; i > 0; i--) {
+      tmp = pow(10, i);
+      comulative_sum[j] = comulative_sum[j-1] + sequence1 * 10 / (int) tmp % 10;
+      printf("%d", sequence1);
       j++;
     }
-    array[j] = n[i] % 10;
-    j++;
+    tmp = sequence2, sequence2 += sequence1, sequence1 = tmp;
   }
 
-  printf("%d\n", array[49]);
+  do{
+    printf("何番目の数字を出力しますか:");
+    scanf("%d", &num);
+    if (num == 0){
+      break;
+    }
+    else{
+      printf("%d番目の数字は%dです\n", num, comulative_sum[num-1] - comulative_sum[num-2]);
+    }
+  }while(1);
 
   return 0;
 
