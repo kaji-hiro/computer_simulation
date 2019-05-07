@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define NUMBER 100
+#define NUMBER 262144
 
 int digit_check(const int num){
   int digits = 0, tmp = num;
@@ -13,19 +13,19 @@ int digit_check(const int num){
 }
 
 int main(void){
-  long int sequence1 = 1, sequence2 = 1, tmp, num, digits;
-  long int comulative_sum [NUMBER] = {0};
+  unsigned long sequence1 = 1, sequence2 = 1, tmp, num, digits;
+  unsigned long comulative_sum [NUMBER] = {0};
   int j = 1;
 
-  while(comulative_sum[NUMBER] == 0){
+  while(1){
     digits = digit_check(sequence1);
     for (int i = digits; i > 0; i--) {
-      tmp = pow(10, i);
-      comulative_sum[j] = comulative_sum[j-1] + sequence1 * 10 / (int) tmp % 10;
-      printf("%d", sequence1);
+      double tmp = pow(10.0, (double) i);
+      comulative_sum[j+1] = comulative_sum[j] + sequence1 * 10 / (int) tmp % 10;
       j++;
     }
     tmp = sequence2, sequence2 += sequence1, sequence1 = tmp;
+    if (j > 200000){break;}
   }
 
   do{
@@ -35,7 +35,7 @@ int main(void){
       break;
     }
     else{
-      printf("%d番目の数字は%dです\n", num, comulative_sum[num-1] - comulative_sum[num-2]);
+      printf("%d番目の数字は%dです\n", num, comulative_sum[num+1] - comulative_sum[num]);
     }
   }while(1);
 
