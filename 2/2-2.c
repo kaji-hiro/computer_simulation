@@ -15,7 +15,7 @@ void selection_sort(int *array, int num){
 
 int main(void){
   int num;
-  
+
   printf("ソートする配列の要素数:");
   scanf("%d", &num);
   int array[num];
@@ -23,7 +23,9 @@ int main(void){
     printf("要素%d:", i+1);
     scanf("%d", &array[i]);
   }
+
   selection_sort(array,num);
+
   printf("ソートしました\n");
   for (size_t i = 0; i < num; i++) {
     printf("要素%d:%d\n", i+1, array[i]);

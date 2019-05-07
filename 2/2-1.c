@@ -21,7 +21,9 @@ int main(void){
     printf("要素%d:", i+1);
     scanf("%d", &array[i]);
   }
+
   bubble_sort(array,num);
+
   printf("ソートしました\n");
   for (size_t i = 0; i < num; i++) {
     printf("要素%d:%d\n", i+1, array[i]);
